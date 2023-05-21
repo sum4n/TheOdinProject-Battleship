@@ -43,13 +43,11 @@ test("Gameboard places ship that takes 3 locations", () => {
 test("Check if receiveAttack hits a target location", () => {
   let gameboard = Gameboard();
   gameboard.placeShip([[0, 0]]);
-  // console.log(gameboard.shipLists[0]);
-  console.log(gameboard.shipLocations);
   expect(gameboard.receiveAttack([0, 0])).toBe(true);
 });
 
-test("Check if receivedAttack misses a target location", () => {
+test("Record missed receivedAttacks", () => {
   let gameboard = Gameboard();
   gameboard.placeShip([[1, 1]]);
-  expect(gameboard.receiveAttack([3, 3])).toBe(false);
+  expect(gameboard.receiveAttack([3, 3])).toEqual([3, 3]);
 });
