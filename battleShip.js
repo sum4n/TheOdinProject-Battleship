@@ -18,25 +18,13 @@ const Ship = (length) => {
 };
 
 const Gameboard = () => {
-  let missedAttackLocations = [];
-
-  let ship = Ship();
-
-  const placeShip = (coOrd) => {
+  const placeShip = (coOrd, length) => {
+    let ship = Ship(length);
     ship.location = coOrd;
-    return ship.location;
+    return ship;
   };
 
-  const receiveAttack = (coOrd) => {
-    if (ship.location.toString() == coOrd.toString()) {
-      return ship.hit();
-    } else {
-      missedAttackLocations.push(coOrd);
-      return coOrd;
-    }
-  };
-
-  return { placeShip, receiveAttack };
+  return { placeShip };
 };
 
 export { Ship, Gameboard };
