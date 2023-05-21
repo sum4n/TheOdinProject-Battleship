@@ -22,20 +22,28 @@ const Gameboard = () => {
   let shipLocations = [];
   let shipLists = [];
 
-  const placeShip = (coOrd = []) => {
+  const placeShip = (coOrd) => {
     let shipLength = coOrd.length;
 
     let ship = Ship(shipLength);
     ship.location = coOrd;
 
-    shipLocations.push(...ship.location);
+    shipLocations.push(JSON.stringify(...ship.location));
 
     shipLists.push(ship);
 
     return ship;
   };
 
-  return { placeShip };
+  const receiveAttack = (coOrd) => {
+    if (shipLocations.includes(JSON.stringify(coOrd))) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  return { placeShip, receiveAttack, shipLists, shipLocations };
 };
 
 export { Ship, Gameboard };

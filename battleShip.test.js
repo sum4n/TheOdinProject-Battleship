@@ -30,15 +30,26 @@ test("Gameboard places ship at specific coordinate", () => {
 test("Gameboard places ship that takes 3 locations", () => {
   let gameboard = Gameboard();
   expect(
-    gameboard.placeShip(
-      [
-        [2, 4],
-        [2, 5],
-      ],
-      3
-    ).location
+    gameboard.placeShip([
+      [2, 4],
+      [2, 5],
+    ]).location
   ).toEqual([
     [2, 4],
     [2, 5],
   ]);
+});
+
+test("Check if receiveAttack hits a target location", () => {
+  let gameboard = Gameboard();
+  gameboard.placeShip([[0, 0]]);
+  // console.log(gameboard.shipLists[0]);
+  console.log(gameboard.shipLocations);
+  expect(gameboard.receiveAttack([0, 0])).toBe(true);
+});
+
+test("Check if receivedAttack misses a target location", () => {
+  let gameboard = Gameboard();
+  gameboard.placeShip([[1, 1]]);
+  expect(gameboard.receiveAttack([3, 3])).toBe(false);
 });
