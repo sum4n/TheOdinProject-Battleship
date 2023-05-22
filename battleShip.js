@@ -23,7 +23,6 @@ const Ship = (length) => {
 
 const Gameboard = () => {
   // location and ship array needed for receiveAttack function
-  let shipLocations = [];
   let shipLists = [];
   let missedShots = [];
 
@@ -31,9 +30,7 @@ const Gameboard = () => {
     let shipLength = coOrd.length;
 
     let ship = Ship(shipLength);
-    ship.location = coOrd;
-
-    shipLocations.push(...coOrd);
+    ship.location = JSON.stringify(coOrd);
 
     shipLists.push(ship);
 
@@ -41,7 +38,12 @@ const Gameboard = () => {
   };
 
   const receiveAttack = (coOrd) => {
-    if (shipLocations.some((i) => JSON.stringify(i) == JSON.stringify(coOrd))) {
+    let targetShip = shipLists.filter((x) =>
+      x.location.includes(JSON.stringify(coOrd))
+    );
+
+    if (targetShip.length > 0) {
+      targetShip[0].hit();
       return true;
     } else {
       missedShots.push(coOrd);
@@ -49,7 +51,7 @@ const Gameboard = () => {
     }
   };
 
-  return { placeShip, receiveAttack, shipLists, shipLocations, missedShots };
+  return { placeShip, receiveAttack, shipLists, missedShots };
 };
 
 export { Ship, Gameboard };

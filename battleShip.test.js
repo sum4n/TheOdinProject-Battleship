@@ -28,7 +28,9 @@ test("Ship length 3 and hit 1 = ship not sunk", () => {
 // Gameboard tests
 test("Gameboard places ship at specific coordinate", () => {
   let gameboard = Gameboard();
-  expect(gameboard.placeShip([[0, 0]]).location).toEqual([[0, 0]]);
+  expect(gameboard.placeShip([[0, 0]]).location).toEqual(
+    JSON.stringify([[0, 0]])
+  );
 });
 
 test("Gameboard places ship that takes 3 locations", () => {
@@ -38,23 +40,12 @@ test("Gameboard places ship that takes 3 locations", () => {
       [2, 4],
       [2, 5],
     ]).location
-  ).toEqual([
-    [2, 4],
-    [2, 5],
-  ]);
-});
-
-test("Placeship saving all ship's location into shipLocations", () => {
-  let gameboard = Gameboard();
-  // gameboard.placeShip([[3, 3]]);
-  gameboard.placeShip([
-    [2, 2],
-    [2, 3],
-  ]);
-  expect(gameboard.shipLocations).toEqual([
-    [2, 2],
-    [2, 3],
-  ]);
+  ).toEqual(
+    JSON.stringify([
+      [2, 4],
+      [2, 5],
+    ])
+  );
 });
 
 test("Check if receiveAttack hits a target location", () => {
@@ -77,18 +68,17 @@ test("Record missed receivedAttacks", () => {
   expect(gameboard.receiveAttack([3, 3])).toEqual([3, 3]);
 });
 
-test.skip("When receiveAttack hits target, send hit function to the correct ship", () => {
+test("When receiveAttack hits target, send hit function to the correct ship", () => {
   let gameboard = Gameboard();
+
   let ship1 = gameboard.placeShip([
     [3, 4],
     [2, 4],
   ]);
+
   let ship2 = gameboard.placeShip([[5, 5]]);
+
   gameboard.receiveAttack([5, 5]);
 
-  console.log(gameboard.shipLocations);
-  console.log(gameboard.shipLists);
-  console.log(ship2.showHit());
-
-  // expect(ship2.showHit()).toBe(1);
+  expect(ship2.showHit()).toBe(1);
 });
