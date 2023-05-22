@@ -33,7 +33,7 @@ test("Gameboard places ship at specific coordinate", () => {
   );
 });
 
-test("Gameboard places ship that takes 3 locations", () => {
+test("Gameboard places ship that takes 2 locations", () => {
   let gameboard = Gameboard();
   expect(
     gameboard.placeShip([
@@ -81,4 +81,35 @@ test("When receiveAttack hits target, send hit function to the correct ship", ()
   gameboard.receiveAttack([5, 5]);
 
   expect(ship2.showHit()).toBe(1);
+});
+
+test("All ships are not sunk", () => {
+  let gameboard = Gameboard();
+  let ship1 = gameboard.placeShip([[2, 2]]);
+  let ship2 = gameboard.placeShip([
+    [4, 5],
+    [4, 6],
+  ]);
+  let ship3 = gameboard.placeShip([[6, 6]]);
+
+  gameboard.receiveAttack([2, 2]);
+  gameboard.receiveAttack([6, 6]);
+
+  expect(gameboard.allShipsSunk()).toBe(false);
+});
+
+test("All ships are sunk", () => {
+  let gameboard = Gameboard();
+
+  let ship2 = gameboard.placeShip([
+    [4, 5],
+    [4, 6],
+  ]);
+  let ship3 = gameboard.placeShip([[6, 6]]);
+
+  gameboard.receiveAttack([4, 5]);
+  gameboard.receiveAttack([6, 6]);
+  gameboard.receiveAttack([4, 6]);
+
+  expect(gameboard.allShipsSunk()).toBe(true);
 });

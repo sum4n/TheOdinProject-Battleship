@@ -55,7 +55,11 @@ const Gameboard = () => {
     }
   };
 
-  return { placeShip, receiveAttack, shipLists, missedShots };
+  const allShipsSunk = () => {
+    return false;
+  };
+
+  return { placeShip, receiveAttack, shipLists, missedShots, allShipsSunk };
 };
 
 export { Ship, Gameboard };
