@@ -14,7 +14,11 @@ const Ship = (length) => {
     if (length != timesHit) return sunk;
   };
 
-  return { hit, isSunk };
+  const showHit = () => {
+    return timesHit;
+  };
+
+  return { length, hit, isSunk, showHit };
 };
 
 const Gameboard = () => {
@@ -29,7 +33,7 @@ const Gameboard = () => {
     let ship = Ship(shipLength);
     ship.location = coOrd;
 
-    shipLocations.push(JSON.stringify(...ship.location));
+    shipLocations.push(...coOrd);
 
     shipLists.push(ship);
 
@@ -37,7 +41,7 @@ const Gameboard = () => {
   };
 
   const receiveAttack = (coOrd) => {
-    if (shipLocations.includes(JSON.stringify(coOrd))) {
+    if (shipLocations.some((i) => JSON.stringify(i) == JSON.stringify(coOrd))) {
       return true;
     } else {
       missedShots.push(coOrd);
