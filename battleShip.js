@@ -48,7 +48,7 @@ const Gameboard = () => {
 
     if (targetShip.length > 0) {
       targetShip[0].hit();
-      return true;
+      return targetShip[0];
     } else {
       missedShots.push(coOrd);
       return coOrd;
