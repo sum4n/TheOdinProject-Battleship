@@ -56,7 +56,12 @@ const Gameboard = () => {
   };
 
   const allShipsSunk = () => {
-    return false;
+    let shipsSunk = shipLists.every((ship) => {
+      // Don't forget to write return next time. ;)
+      return ship.isSunk() == true;
+    });
+
+    return shipsSunk;
   };
 
   return { placeShip, receiveAttack, shipLists, missedShots, allShipsSunk };
