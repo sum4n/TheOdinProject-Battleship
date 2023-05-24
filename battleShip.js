@@ -67,4 +67,12 @@ const Gameboard = () => {
   return { placeShip, receiveAttack, shipLists, missedShots, allShipsSunk };
 };
 
-export { Ship, Gameboard };
+const Player = () => {
+  let gameboard = Gameboard();
+
+  const attack = (coOrd) => {};
+
+  return { gameboard };
+};
+
+export { Ship, Gameboard, Player };

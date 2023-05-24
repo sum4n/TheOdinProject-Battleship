@@ -1,4 +1,4 @@
-import { Ship, Gameboard } from "./battleShip";
+import { Ship, Gameboard, Player } from "./battleShip";
 
 // Ship tests
 describe("Tests for Ship", () => {
@@ -75,5 +75,24 @@ describe("Tests for Gameboard", () => {
     gameboard.receiveAttack([3, 6]);
 
     expect(gameboard.allShipsSunk()).toBe(true);
+  });
+});
+
+describe("Player tests", () => {
+  test("player 'successfully' receives 1 attack", () => {
+    let player = Player();
+    player.gameboard.placeShip([[2, 4]]);
+
+    expect(player.gameboard.receiveAttack([2, 4]).showHit()).toBe(1);
+  });
+
+  test("player1 'successfully' attacks player2", () => {
+    let player1 = Player();
+    player1.gameboard.placeShip([[2, 4]]);
+    let player2 = Player();
+    player2.gameboard.placeShip([[3, 6]]);
+
+    player1.attack([2, 4]);
+    expect(player2.ship.showHit()).toBe(1);
   });
 });
