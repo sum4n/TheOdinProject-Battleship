@@ -98,21 +98,16 @@ describe("Player tests", () => {
 });
 
 describe("AI tests", () => {
-  test("AI creates 5 ships", () => {
+  test("AI can not shoot same coordinate twice.", () => {
+    let player = Player();
     let ai = AI();
-    expect(ai.gameboard.shipLists.length).toBe(5);
-  });
 
-  test("AI ships are at random location", () => {
-    let ai = AI();
-    let locationArray = [];
-
-    ai.gameboard.shipLists.forEach((ship) => {
-      locationArray.push(ship.location);
-    });
+    ai.attack(player, [3, 5]);
+    ai.attack(player, [3, 5]);
+    ai.attack(player);
 
     // if there is no duplicate location, Set will not remove any duplicate from
-    // locationArray and locationArray's lenght will be same as Set(locationArray).size
-    expect(new Set(locationArray).size == locationArray.length).toBe(true);
+    // coOrdList and coOrdList's lenght will be same as Set(coOrdList).size
+    expect(new Set(ai.coOrdList).size == ai.coOrdList.length).toBe(true);
   });
 });

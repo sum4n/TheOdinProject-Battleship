@@ -79,13 +79,27 @@ const Player = () => {
 
 const AI = () => {
   let gameboard = Gameboard();
-  let ship1 = gameboard.placeShip([[2, 4]]);
-  let ship2 = gameboard.placeShip([[2, 4]]);
-  let ship3 = gameboard.placeShip([[2, 4]]);
-  let ship4 = gameboard.placeShip([[2, 4]]);
-  let ship5 = gameboard.placeShip([[2, 4]]);
 
-  return { gameboard };
+  let coOrdList = [];
+
+  let attackCoOrd = getRandomCoordinate();
+
+  const attack = (anotherPlayer, location = attackCoOrd) => {
+    while (coOrdList.includes(JSON.stringify(location))) {
+      location = getRandomCoordinate();
+    }
+    coOrdList.push(JSON.stringify(location));
+    return anotherPlayer.gameboard.receiveAttack(location);
+  };
+
+  return { gameboard, coOrdList, attack };
 };
+
+function getRandomCoordinate() {
+  let coOrdX = Math.floor(Math.random() * 10);
+  let coOrdY = Math.floor(Math.random() * 10);
+
+  return [coOrdX, coOrdY];
+}
 
 export { Ship, Gameboard, Player, AI };
