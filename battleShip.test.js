@@ -88,11 +88,11 @@ describe("Player tests", () => {
 
   test("player1 'successfully' attacks player2", () => {
     let player1 = Player();
-    player1.gameboard.placeShip([[2, 4]]);
     let player2 = Player();
-    player2.gameboard.placeShip([[3, 6]]);
+    let player2_ship = player2.gameboard.placeShip([[3, 6]]);
 
-    player1.attack([2, 4]);
-    expect(player2.ship.showHit()).toBe(1);
+    player1.attack([3, 6], player2);
+
+    expect(player2_ship.showHit()).toBe(1);
   });
 });

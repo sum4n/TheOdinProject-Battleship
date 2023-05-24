@@ -70,9 +70,11 @@ const Gameboard = () => {
 const Player = () => {
   let gameboard = Gameboard();
 
-  const attack = (coOrd) => {};
+  const attack = (coOrd, anotherPlayer) => {
+    return anotherPlayer.gameboard.receiveAttack(coOrd);
+  };
 
-  return { gameboard };
+  return { gameboard, attack };
 };
 
 export { Ship, Gameboard, Player };
