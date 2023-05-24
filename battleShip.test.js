@@ -1,4 +1,4 @@
-import { Ship, Gameboard, Player } from "./battleShip";
+import { Ship, Gameboard, Player, AI } from "./battleShip";
 
 // Ship tests
 describe("Tests for Ship", () => {
@@ -94,5 +94,25 @@ describe("Player tests", () => {
     player1.attack([3, 6], player2);
 
     expect(player2_ship.showHit()).toBe(1);
+  });
+});
+
+describe("AI tests", () => {
+  test("AI creates 5 ships", () => {
+    let ai = AI();
+    expect(ai.gameboard.shipLists.length).toBe(5);
+  });
+
+  test("AI ships are at random location", () => {
+    let ai = AI();
+    let locationArray = [];
+
+    ai.gameboard.shipLists.forEach((ship) => {
+      locationArray.push(ship.location);
+    });
+
+    // if there is no duplicate location, Set will not remove any duplicate from
+    // locationArray and locationArray's lenght will be same as Set(locationArray).size
+    expect(new Set(locationArray).size == locationArray.length).toBe(true);
   });
 });

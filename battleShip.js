@@ -77,4 +77,15 @@ const Player = () => {
   return { gameboard, attack };
 };
 
-export { Ship, Gameboard, Player };
+const AI = () => {
+  let gameboard = Gameboard();
+  let ship1 = gameboard.placeShip([[2, 4]]);
+  let ship2 = gameboard.placeShip([[2, 4]]);
+  let ship3 = gameboard.placeShip([[2, 4]]);
+  let ship4 = gameboard.placeShip([[2, 4]]);
+  let ship5 = gameboard.placeShip([[2, 4]]);
+
+  return { gameboard };
+};
+
+export { Ship, Gameboard, Player, AI };
