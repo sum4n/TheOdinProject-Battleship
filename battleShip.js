@@ -80,19 +80,18 @@ const Player = () => {
 const AI = () => {
   let gameboard = Gameboard();
 
-  let coOrdList = [];
+  let aiAttackList = [];
 
-  let attackCoOrd = getRandomCoordinate();
-
-  const attack = (anotherPlayer, location = attackCoOrd) => {
-    while (coOrdList.includes(JSON.stringify(location))) {
-      location = getRandomCoordinate();
+  const attack = (targetPlayer, attackLocation = getRandomCoordinate()) => {
+    // if the attackLocation is in the aiAttackList, chose another attackLocation.
+    while (aiAttackList.includes(JSON.stringify(attackLocation))) {
+      attackLocation = getRandomCoordinate();
     }
-    coOrdList.push(JSON.stringify(location));
-    return anotherPlayer.gameboard.receiveAttack(location);
+    aiAttackList.push(JSON.stringify(attackLocation));
+    return targetPlayer.gameboard.receiveAttack(attackLocation);
   };
 
-  return { gameboard, coOrdList, attack };
+  return { gameboard, aiAttackList, attack };
 };
 
 function getRandomCoordinate() {

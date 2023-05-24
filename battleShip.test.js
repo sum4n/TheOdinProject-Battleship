@@ -107,7 +107,7 @@ describe("AI tests", () => {
     ai.attack(player);
 
     // if there is no duplicate location, Set will not remove any duplicate from
-    // coOrdList and coOrdList's lenght will be same as Set(coOrdList).size
-    expect(new Set(ai.coOrdList).size == ai.coOrdList.length).toBe(true);
+    // aiAttackList and aiAttackList's lenght will be same as Set(aiAttackList).size
+    expect(new Set(ai.aiAttackList).size == ai.aiAttackList.length).toBe(true);
   });
 });
