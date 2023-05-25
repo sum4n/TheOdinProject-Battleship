@@ -94,10 +94,10 @@ const AI = () => {
   let allAIShipLocations = [];
 
   const createValidShipLocation = (
-    length = 5,
+    size = 5,
     shipHead = getRandomCoordinate()
   ) => {
-    length = length - 1;
+    let length = size - 1;
     let shipLocations = [];
 
     while (
@@ -107,23 +107,28 @@ const AI = () => {
       shipHead = getRandomCoordinate();
     }
 
-    shipLocations.push(shipHead);
-
     let i = shipHead[0];
     let j = shipHead[1];
     let k = shipHead[0] + length;
 
     while (i != k) {
       i++;
+      // if there is duplicate, recursively start the function again
+      if (allAIShipLocations.includes(JSON.stringify([i, j]))) {
+        shipLocations = [];
+        return createValidShipLocation(size);
+      }
       shipLocations.push([i, j]);
       // console.log(shipLocations);
     }
 
+    // add shiphead at the beginning of the list
+    shipLocations.splice(0, 0, shipHead);
+    // console.log(shipLocations);
+
     shipLocations.forEach((location) => {
       allAIShipLocations.push(JSON.stringify(location));
     });
-
-    // allAIShipLocations.push(JSON.stringify(shipLocations));
 
     return shipLocations;
   };
