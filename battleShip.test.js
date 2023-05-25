@@ -118,4 +118,20 @@ describe("AI tests", () => {
     }
     expect(ai.aiAttackList.length).toBe(100);
   });
+
+  test("AI can place ship at 'valid' random locations", () => {
+    let ai = AI();
+
+    // console.log(ai.createValidShipLocation(4));
+    let ship5_location = ai.createValidShipLocation(5);
+    let ship4_location = ai.createValidShipLocation(4);
+    let ship3_location = ai.createValidShipLocation(3);
+    let ship2_location = ai.createValidShipLocation(3);
+    let ship1_location = ai.createValidShipLocation(2);
+
+    // all ships have valid location; no cross location
+    expect(
+      new Set(ai.allAIShipLocations).size == ai.allAIShipLocations.length
+    ).toBe(true);
+  });
 });

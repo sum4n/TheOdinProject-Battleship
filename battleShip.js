@@ -91,7 +91,50 @@ const AI = () => {
     return targetPlayer.gameboard.receiveAttack(attackLocation);
   };
 
-  return { gameboard, aiAttackList, attack };
+  let allAIShipLocations = [];
+
+  const createValidShipLocation = (
+    length = 5,
+    shipHead = getRandomCoordinate()
+  ) => {
+    length = length - 1;
+    let shipLocations = [];
+
+    while (
+      allAIShipLocations.includes(JSON.stringify(shipHead)) ||
+      shipHead[0] + length >= 9
+    ) {
+      shipHead = getRandomCoordinate();
+    }
+
+    shipLocations.push(shipHead);
+
+    let i = shipHead[0];
+    let j = shipHead[1];
+    let k = shipHead[0] + length;
+
+    while (i != k) {
+      i++;
+      shipLocations.push([i, j]);
+      // console.log(shipLocations);
+    }
+
+    shipLocations.forEach((location) => {
+      allAIShipLocations.push(JSON.stringify(location));
+    });
+
+    // allAIShipLocations.push(JSON.stringify(shipLocations));
+
+    return shipLocations;
+  };
+
+  return {
+    gameboard,
+    aiAttackList,
+    attack,
+    createValidShipLocation,
+    allAIShipLocations,
+  };
 };
 
 function getRandomCoordinate() {
