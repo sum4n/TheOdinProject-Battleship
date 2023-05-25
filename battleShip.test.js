@@ -1,4 +1,7 @@
-import { Ship, Gameboard, Player, AI } from "./battleShip";
+import { Ship } from "./battleShip";
+import { Gameboard } from "./gameBoard";
+import { Player } from "./player";
+import { AI } from "./ai";
 
 // Ship tests
 describe("Tests for Ship", () => {
