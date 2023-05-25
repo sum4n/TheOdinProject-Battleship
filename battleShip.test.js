@@ -101,13 +101,21 @@ describe("AI tests", () => {
   test("AI can not shoot same coordinate twice.", () => {
     let player = Player();
     let ai = AI();
-
-    ai.attack(player, [3, 5]);
-    ai.attack(player, [3, 5]);
-    ai.attack(player);
-
+    while (ai.aiAttackList.length != 100) {
+      ai.attack(player);
+    }
+    // if there is duplicate value it will return false.
     // if there is no duplicate location, Set will not remove any duplicate from
     // aiAttackList and aiAttackList's lenght will be same as Set(aiAttackList).size
     expect(new Set(ai.aiAttackList).size == ai.aiAttackList.length).toBe(true);
+  });
+
+  test("AI can shoot at all the gameboard coordinates(100 in 10x10 board)", () => {
+    let player = Player();
+    let ai = AI();
+    while (ai.aiAttackList.length != 100) {
+      ai.attack(player);
+    }
+    expect(ai.aiAttackList.length).toBe(100);
   });
 });
