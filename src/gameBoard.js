@@ -4,6 +4,7 @@ const Gameboard = () => {
   // shipLists will be used for tracking ships and to be able to use actions on them.
   let shipLists = [];
   let missedShots = [];
+  let shipLocationLists = [];
 
   const placeShip = (coOrd) => {
     let shipLength = coOrd.length;
@@ -13,6 +14,10 @@ const Gameboard = () => {
     ship.location = JSON.stringify(coOrd);
 
     shipLists.push(ship);
+
+    coOrd.forEach((location) => {
+      shipLocationLists.push(JSON.stringify(location));
+    });
 
     return ship;
   };
@@ -43,7 +48,14 @@ const Gameboard = () => {
     return shipsSunk;
   };
 
-  return { placeShip, receiveAttack, shipLists, missedShots, allShipsSunk };
+  return {
+    placeShip,
+    receiveAttack,
+    shipLists,
+    missedShots,
+    allShipsSunk,
+    shipLocationLists,
+  };
 };
 
 export { Gameboard };

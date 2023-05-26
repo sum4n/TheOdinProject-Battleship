@@ -1,5 +1,12 @@
 import { Player } from "./player";
 import { AI } from "./ai";
+import { uiGameBoard } from "./uiGameBoard";
+import { Ship } from "./battleShip";
+
+const body = document.querySelector("body");
+body.style.cssText = "display: flex; justify-content: space-around";
+body.appendChild(uiGameBoard("player"));
+body.appendChild(uiGameBoard("ai"));
 
 let player = Player();
 let p_ship1 = player.gameboard.placeShip([
@@ -43,15 +50,57 @@ let ai_ship3 = ai.gameboard.placeShip(location3);
 let ai_ship4 = ai.gameboard.placeShip(location4);
 let ai_ship5 = ai.gameboard.placeShip(location5);
 
-while (!player.gameboard.allShipsSunk() && !ai.gameboard.allShipsSunk()) {
-  player.attack([3, 6], ai);
+console.log(player.gameboard.shipLocationLists);
+let playerBoard = document.getElementById("player");
+console.log(playerBoard);
+
+player.gameboard.shipLocationLists.forEach((location) => {
+  // console.log(JSON.stringify(location));
+  let cell = document.getElementById(JSON.stringify(location));
+  // console.log(cell);
+  cell.style.cssText =
+    "background: green; border: 1px solid red; height: 40px; width: 40px";
+});
+
+const gameCell = document.querySelector("#ai");
+
+gameCell.addEventListener("click", (e) => {
+  console.log(e.target.id);
+  let attackedCell = e.target;
+  attackedCell.style.cssText =
+    "background: green; border: 1px solid red; height: 40px; width: 40px";
+
+  player.attack(e.target.id, ai);
+  // console.log(player.gameboard.missedShots);
   ai.attack(player);
-}
 
-if (player.gameboard.allShipsSunk()) {
-  console.log("Ai wins");
-}
+  if (player.gameboard.allShipsSunk()) {
+    console.log("Ai wins");
+  }
 
-if (ai.gameboard.allShipsSunk()) {
-  console.log("Player wins");
-}
+  if (ai.gameboard.allShipsSunk()) {
+    console.log("Player wins");
+  }
+});
+
+// console.log(ai.allAIShipLocations);
+// ai.allAIShipLocations.forEach((location) => {
+//   let x = JSON.stringify(location);
+//   let cell = document.getElementById(x);
+//   cell.style.cssText = "background-color: green;";
+//   console.log(cell);
+//   console.log(x);
+// });
+
+// while (!player.gameboard.allShipsSunk() && !ai.gameboard.allShipsSunk()) {
+//   player.attack([3, 6], ai);
+//   ai.attack(player);
+// }
+
+// if (player.gameboard.allShipsSunk()) {
+//   console.log("Ai wins");
+// }
+
+// if (ai.gameboard.allShipsSunk()) {
+//   console.log("Player wins");
+// }
