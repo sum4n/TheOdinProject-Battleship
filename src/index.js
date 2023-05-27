@@ -68,7 +68,7 @@ function populatePlayerBoard() {
 }
 populatePlayerBoard();
 
-// ai board
+// ai board printing for test
 function populateAiBoard() {
   console.log(ai.allAIShipLocations);
   ai.allAIShipLocations.forEach((location) => {
@@ -90,17 +90,23 @@ aiGameBoard.addEventListener("click", (e) => {
     player.gameboard.allShipsSunk() != true &&
     ai.gameboard.allShipsSunk() != true
   ) {
-    let attackedCell = e.target;
-    attackedCell.style.cssText =
-      "background: green; border: 1px solid red; height: 40px; width: 40px";
-
     // Player attacks AI
-    // convert string to array
+    // convert cell class string to array
     let playerTarget = [
       parseInt(e.target.className[2]),
       parseInt(e.target.className[4]),
     ];
+
     // console.log(playerTarget);
+    // console.log(ai.allAIShipLocations.includes(JSON.stringify(playerTarget)));
+    // hits paints target red, misses paints target red.
+    if (ai.allAIShipLocations.includes(JSON.stringify(playerTarget))) {
+      e.target.style.cssText =
+        "background: yellow; border: 1px solid red; height: 40px; width: 40px";
+    } else {
+      e.target.style.cssText =
+        "background: red; border: 1px solid red; height: 40px; width: 40px";
+    }
     player.attack(playerTarget, ai);
 
     // console.log(player.gameboard.missedShots);
