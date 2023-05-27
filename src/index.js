@@ -94,11 +94,18 @@ aiGameBoard.addEventListener("click", (e) => {
     attackedCell.style.cssText =
       "background: green; border: 1px solid red; height: 40px; width: 40px";
 
-    player.attack(e.target.className, ai);
+    // Player attacks AI
+    // convert string to array
+    let playerTarget = [
+      parseInt(e.target.className[2]),
+      parseInt(e.target.className[4]),
+    ];
+    // console.log(playerTarget);
+    player.attack(playerTarget, ai);
 
     // console.log(player.gameboard.missedShots);
 
-    // ai attacks player (after player attacks) and print attacks on gameboard.
+    // Ai attacks Player (after player attacks) and print attacks on gameboard.
     ai.attack(player);
 
     // find the latest attack (which is last item on the list)
@@ -130,6 +137,6 @@ aiGameBoard.addEventListener("click", (e) => {
   }
 
   if (ai.gameboard.allShipsSunk()) {
-    console.log("Player wins");
+    alert("Player wins");
   }
 });
