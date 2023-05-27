@@ -91,15 +91,21 @@ aiGameBoard.addEventListener("click", (e) => {
 
   // ai attacks player (after player attacks) and print attacks on gameboard.
   ai.attack(player);
-  // ai attacks get printed on player board
-  ai.aiAttackList.forEach((target) => {
-    // Do not like the implementaion
-    target = JSON.stringify(target);
-    let aiTarget = document.getElementsByClassName(target)[0];
+
+  // find the latest attack (which is last item on the list)
+  let target = ai.aiAttackList[ai.aiAttackList.length - 1];
+  target = JSON.stringify(target);
+
+  let aiTarget = document.getElementsByClassName(target)[0];
+  // print successful attack yellow and unsuccessful red
+  if (aiTarget.style.background == "green") {
+    aiTarget.style.cssText =
+      "background: yellow; border: 1px solid red; height: 40px; width: 40px";
+  } else {
     aiTarget.style.cssText =
       "background: red; border: 1px solid red; height: 40px; width: 40px";
     // console.log(aiTarget);
-  });
+  }
 
   // console.log(ai_ship5.showHit());
   // console.log(ai_ship4.showHit());
@@ -115,16 +121,3 @@ aiGameBoard.addEventListener("click", (e) => {
     console.log("Player wins");
   }
 });
-
-// while (!player.gameboard.allShipsSunk() && !ai.gameboard.allShipsSunk()) {
-//   player.attack([3, 6], ai);
-//   ai.attack(player);
-// }
-
-// if (player.gameboard.allShipsSunk()) {
-//   console.log("Ai wins");
-// }
-
-// if (ai.gameboard.allShipsSunk()) {
-//   console.log("Player wins");
-// }
