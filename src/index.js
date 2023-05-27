@@ -8,6 +8,7 @@ body.style.cssText = "display: flex; justify-content: space-around";
 body.appendChild(uiGameBoard("player"));
 body.appendChild(uiGameBoard("ai"));
 
+// create player and ai ships
 let player = Player();
 let p_ship1 = player.gameboard.placeShip([
   [2, 4],
@@ -50,29 +51,61 @@ let ai_ship3 = ai.gameboard.placeShip(location3);
 let ai_ship4 = ai.gameboard.placeShip(location4);
 let ai_ship5 = ai.gameboard.placeShip(location5);
 
+// player board
 console.log(player.gameboard.shipLocationLists);
 let playerBoard = document.getElementById("player");
-console.log(playerBoard);
+// console.log(playerBoard);
 
 player.gameboard.shipLocationLists.forEach((location) => {
   // console.log(JSON.stringify(location));
-  let cell = document.getElementById(JSON.stringify(location));
+  // [0] indicates cells from player board
+  let cell = document.getElementsByClassName(JSON.stringify(location))[0];
   // console.log(cell);
   cell.style.cssText =
     "background: green; border: 1px solid red; height: 40px; width: 40px";
 });
 
-const gameCell = document.querySelector("#ai");
+// ai board
+console.log(ai.allAIShipLocations);
+ai.allAIShipLocations.forEach((location) => {
+  let x = JSON.stringify(location);
+  // [1] indicates cells from ai board
+  let cell = document.getElementsByClassName(x)[1];
+  // console.log(cell);
+  cell.style.cssText =
+    "background: green; border: 1px solid red; height: 40px; width: 40px";
+});
 
-gameCell.addEventListener("click", (e) => {
-  console.log(e.target.id);
+// game loop
+const aiGameBoard = document.querySelector("#ai");
+
+aiGameBoard.addEventListener("click", (e) => {
+  // console.log(e.target.className);
   let attackedCell = e.target;
   attackedCell.style.cssText =
     "background: green; border: 1px solid red; height: 40px; width: 40px";
 
-  player.attack(e.target.id, ai);
+  player.attack(e.target.className, ai);
+
   // console.log(player.gameboard.missedShots);
+
+  // ai attacks player (after player attacks) and print attacks on gameboard.
   ai.attack(player);
+  // ai attacks get printed on player board
+  ai.aiAttackList.forEach((target) => {
+    // Do not like the implementaion
+    target = JSON.stringify(target);
+    let aiTarget = document.getElementsByClassName(target)[0];
+    aiTarget.style.cssText =
+      "background: red; border: 1px solid red; height: 40px; width: 40px";
+    // console.log(aiTarget);
+  });
+
+  // console.log(ai_ship5.showHit());
+  // console.log(ai_ship4.showHit());
+  // console.log(ai_ship3.showHit());
+  // console.log(ai_ship2.showHit());
+  // console.log(ai_ship1.showHit());
 
   if (player.gameboard.allShipsSunk()) {
     console.log("Ai wins");
@@ -82,15 +115,6 @@ gameCell.addEventListener("click", (e) => {
     console.log("Player wins");
   }
 });
-
-// console.log(ai.allAIShipLocations);
-// ai.allAIShipLocations.forEach((location) => {
-//   let x = JSON.stringify(location);
-//   let cell = document.getElementById(x);
-//   cell.style.cssText = "background-color: green;";
-//   console.log(cell);
-//   console.log(x);
-// });
 
 // while (!player.gameboard.allShipsSunk() && !ai.gameboard.allShipsSunk()) {
 //   player.attack([3, 6], ai);

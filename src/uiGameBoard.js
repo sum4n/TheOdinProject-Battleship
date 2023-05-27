@@ -33,7 +33,8 @@ function addRowDiv(parentDiv, array) {
   //   rowDiv.classList.add("rowDiv");
   rowDiv.style.cssText = "height: 40px; width: 40px; border: 1px solid red;";
   rowDiv.textContent = array;
-  rowDiv.setAttribute("id", JSON.stringify(array));
+  // rowDiv.setAttribute("id", JSON.stringify(array));
+  rowDiv.classList.add(JSON.stringify(array));
   parentDiv.appendChild(rowDiv);
 
   return rowDiv;
