@@ -87,6 +87,12 @@ const aiGameBoard = document.querySelector("#ai");
 
 aiGameBoard.addEventListener("click", (e) => {
   if (
+    e.target.style.background == "red" ||
+    e.target.style.background == "yellow"
+  ) {
+    return;
+  }
+  if (
     player.gameboard.allShipsSunk() != true &&
     ai.gameboard.allShipsSunk() != true
   ) {
