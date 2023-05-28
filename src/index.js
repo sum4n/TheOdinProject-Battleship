@@ -1,7 +1,6 @@
 import { Player } from "./player";
 import { AI } from "./ai";
 import { uiGameBoard } from "./uiGameBoard";
-import { Ship } from "./battleShip";
 
 const body = document.querySelector("body");
 body.style.cssText = "display: flex; justify-content: space-around";
@@ -53,7 +52,7 @@ let ai_ship5 = ai.gameboard.placeShip(location5);
 
 // player board
 function populatePlayerBoard() {
-  console.log(player.gameboard.shipLocationLists);
+  // console.log(player.gameboard.shipLocationLists);
   let playerBoard = document.getElementById("player");
   // console.log(playerBoard);
 
@@ -70,7 +69,7 @@ populatePlayerBoard();
 
 // ai board printing for test
 function populateAiBoard() {
-  console.log(ai.allAIShipLocations);
+  // console.log(ai.allAIShipLocations);
   ai.allAIShipLocations.forEach((location) => {
     let x = JSON.stringify(location);
     // [1] indicates cells from ai board
@@ -139,13 +138,13 @@ aiGameBoard.addEventListener("click", (e) => {
 
   if (player.gameboard.allShipsSunk()) {
     alert("Ai wins");
-    document.getElementById("player").remove();
-    document.getElementById("ai").remove();
-    body.appendChild(uiGameBoard("player"));
-    body.appendChild(uiGameBoard("ai"));
-    // ai.aiAttackList = [];
-    populatePlayerBoard();
-    populateAiBoard();
+    // document.getElementById("player").remove();
+    // document.getElementById("ai").remove();
+    // body.appendChild(uiGameBoard("player"));
+    // body.appendChild(uiGameBoard("ai"));
+    // // ai.aiAttackList = [];
+    // populatePlayerBoard();
+    // populateAiBoard();
   }
 
   if (ai.gameboard.allShipsSunk()) {

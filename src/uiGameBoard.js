@@ -2,7 +2,9 @@ function uiGameBoard(id) {
   const gameBoardContainer = document.createElement("div");
   gameBoardContainer.setAttribute("id", id);
   gameBoardContainer.style.cssText =
-    "height: 420px; width: 400px; border: 1px solid black;";
+    "height: 420px; width: 400px; text-align: center";
+
+  gameBoardContainer.textContent = id + " Board";
 
   for (let i = 0; i <= 9; i++) {
     let columnDiv = addColumnDiv(gameBoardContainer);
