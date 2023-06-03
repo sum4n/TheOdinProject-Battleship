@@ -1,34 +1,5 @@
-import { AI } from "./ai";
 import { player, populatePlayerBoard } from "./populatePlayer";
-
-// create player and ai ships
-
-let ai = AI();
-let location1 = ai.createValidShipLocation(5);
-let location2 = ai.createValidShipLocation(4);
-let location3 = ai.createValidShipLocation(3);
-let location4 = ai.createValidShipLocation(3);
-let location5 = ai.createValidShipLocation(2);
-
-let ai_ship1 = ai.gameboard.placeShip(location1);
-let ai_ship2 = ai.gameboard.placeShip(location2);
-let ai_ship3 = ai.gameboard.placeShip(location3);
-let ai_ship4 = ai.gameboard.placeShip(location4);
-let ai_ship5 = ai.gameboard.placeShip(location5);
-
-// ai board printing for test
-function populateAiBoard() {
-  // console.log(ai.allAIShipLocations);
-  ai.allAIShipLocations.forEach((location) => {
-    let x = JSON.stringify(location);
-    // [1] indicates cells from ai board
-    let cell = document.getElementsByClassName(x)[1];
-    // console.log(cell);
-    cell.style.cssText =
-      "background: green; border: 1px solid red; height: 40px; width: 40px";
-  });
-}
-// populateAiBoard();
+import { ai, populateAiBoard } from "./populateAi";
 
 // game loop
 function gameloop() {
