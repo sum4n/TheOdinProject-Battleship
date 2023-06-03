@@ -3,9 +3,13 @@ import { uiGameBoard } from "./uiGameBoard";
 import { populatePlayerBoard, populateAiBoard, gameloop } from "./gameLoop";
 
 const body = document.querySelector("body");
-body.style.cssText = "display: flex; justify-content: space-around";
-body.appendChild(uiGameBoard("player"));
-body.appendChild(uiGameBoard("ai"));
+
+const gameBoardDiv = document.createElement("div");
+gameBoardDiv.style.cssText = "display: flex; justify-content: space-around";
+gameBoardDiv.appendChild(uiGameBoard("player"));
+gameBoardDiv.appendChild(uiGameBoard("ai"));
+
+body.appendChild(gameBoardDiv);
 
 populatePlayerBoard();
 populateAiBoard();
