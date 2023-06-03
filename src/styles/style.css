@@ -1,0 +1,12 @@
+#gameBoardDiv {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* player and ai board */
+#player,
+#ai {
+  height: 420px;
+  width: 400px;
+  text-align: center;
+}

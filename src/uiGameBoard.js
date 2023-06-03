@@ -1,8 +1,6 @@
 function uiGameBoard(id) {
   const gameBoardContainer = document.createElement("div");
   gameBoardContainer.setAttribute("id", id);
-  gameBoardContainer.style.cssText =
-    "height: 420px; width: 400px; text-align: center";
 
   gameBoardContainer.textContent = id + " Board";
 
