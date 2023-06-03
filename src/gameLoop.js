@@ -25,8 +25,8 @@ function gameloop() {
       // Player attacks AI
       // convert cell class string to array
       let playerTarget = [
-        parseInt(e.target.className[2]),
-        parseInt(e.target.className[4]),
+        parseInt(e.target.className[7]),
+        parseInt(e.target.className[9]),
       ];
 
       // console.log(playerTarget);

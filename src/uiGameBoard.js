@@ -29,11 +29,12 @@ function addRowDiv(parentDiv, array) {
   // do not know why JSON.stringfy is needed twice here.
   array = JSON.stringify(array);
   const rowDiv = document.createElement("div");
-  //   rowDiv.classList.add("rowDiv");
-  // rowDiv.textContent = array;
-  // rowDiv.setAttribute("id", JSON.stringify(array));
+
+  // 'cell' class for styling
   rowDiv.classList.add("cell");
-  rowDiv.setAttribute("id", JSON.stringify(array));
+  // 'array' class for targetting
+  rowDiv.classList.add(JSON.stringify(array));
+
   parentDiv.appendChild(rowDiv);
 
   return rowDiv;
