@@ -18,8 +18,23 @@
   border: 1px solid red;
 }
 
-.cell {
+.cell,
+.shipCell,
+.hitCell,
+.missCell {
   height: 40px;
   width: 40px;
   border: 1px solid red;
+}
+
+.shipCell {
+  background-color: green;
+}
+
+.hitCell {
+  background-color: yellow;
+}
+
+.missCell {
+  background-color: rgb(218, 137, 137);
 }

@@ -6,11 +6,12 @@ function gameloop() {
   const aiGameBoard = document.querySelector("#ai");
 
   aiGameBoard.addEventListener("click", (e) => {
+    // console.log(e.target.classList);
     // Nothing happens if player clicks on ai board's alredy colored cells or
     // when the game has ended.
     if (
-      e.target.style.background == "red" ||
-      e.target.style.background == "yellow" ||
+      e.target.classList.contains("hitCell") ||
+      e.target.classList.contains("missCell") ||
       player.gameboard.allShipsSunk() ||
       ai.gameboard.allShipsSunk()
     ) {
@@ -25,19 +26,18 @@ function gameloop() {
       // Player attacks AI
       // convert cell class string to array
       let playerTarget = [
-        parseInt(e.target.className[7]),
-        parseInt(e.target.className[9]),
+        parseInt(e.target.className[2]),
+        parseInt(e.target.className[4]),
       ];
 
       // console.log(playerTarget);
       // console.log(ai.allAIShipLocations.includes(JSON.stringify(playerTarget)));
-      // hits paints target red, misses paints target red.
+
+      // Hits paints target red, misses paints target red.
       if (ai.allAIShipLocations.includes(JSON.stringify(playerTarget))) {
-        e.target.style.cssText =
-          "background: yellow; border: 1px solid red; height: 40px; width: 40px";
+        e.target.classList.replace("shipCell", "hitCell");
       } else {
-        e.target.style.cssText =
-          "background: red; border: 1px solid red; height: 40px; width: 40px";
+        e.target.classList.replace("cell", "missCell");
       }
       player.attack(playerTarget, ai);
 
@@ -51,13 +51,12 @@ function gameloop() {
       target = JSON.stringify(target);
 
       let aiTarget = document.getElementsByClassName(target)[0];
+      // console.log(aiTarget.classList.contains("shipCell"));
       // print successful attack yellow and unsuccessful red
-      if (aiTarget.style.background == "green") {
-        aiTarget.style.cssText =
-          "background: yellow; border: 1px solid red; height: 40px; width: 40px";
+      if (aiTarget.classList.contains("shipCell")) {
+        aiTarget.classList.replace("shipCell", "hitCell");
       } else {
-        aiTarget.style.cssText =
-          "background: red; border: 1px solid red; height: 40px; width: 40px";
+        aiTarget.classList.replace("cell", "missCell");
         // console.log(aiTarget);
       }
     }

@@ -22,8 +22,7 @@ function populateAiBoard() {
     // [1] indicates cells from ai board
     let cell = document.getElementsByClassName(x)[1];
     // console.log(cell);
-    cell.style.cssText =
-      "background: green; border: 1px solid red; height: 40px; width: 40px";
+    cell.classList.replace("cell", "shipCell");
   });
 }
 

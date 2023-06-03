@@ -30,10 +30,11 @@ function addRowDiv(parentDiv, array) {
   array = JSON.stringify(array);
   const rowDiv = document.createElement("div");
 
+  // 'array' class for targetting. Add this before 'cell' for gameLoop() 'index' targeting.
+  rowDiv.classList.add(JSON.stringify(array));
+
   // 'cell' class for styling
   rowDiv.classList.add("cell");
-  // 'array' class for targetting
-  rowDiv.classList.add(JSON.stringify(array));
 
   parentDiv.appendChild(rowDiv);
 

@@ -39,9 +39,7 @@ function populatePlayerBoard() {
     // console.log(JSON.stringify(location));
     // [0] indicates cells from player board
     let cell = document.getElementsByClassName(JSON.stringify(location))[0];
-    // console.log(cell);
-    cell.style.cssText =
-      "background: green; border: 1px solid red; height: 40px; width: 40px";
+    cell.classList.replace("cell", "shipCell");
   });
 }
 // populatePlayerBoard();
