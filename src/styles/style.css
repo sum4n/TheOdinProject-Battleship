@@ -10,3 +10,16 @@
   width: 400px;
   text-align: center;
 }
+
+.columnCell {
+  display: flex;
+  height: 40px;
+  width: 400px;
+  border: 1px solid red;
+}
+
+.cell {
+  height: 40px;
+  width: 40px;
+  border: 1px solid red;
+}

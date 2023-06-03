@@ -18,9 +18,8 @@ export { uiGameBoard };
 
 function addColumnDiv(parentDiv) {
   const columnDiv = document.createElement("div");
-  //   columnDiv.classList.add("columnDiv");
-  columnDiv.style.cssText =
-    "height: 40px; width: 400px; border: 1px solid red; display:flex";
+  columnDiv.classList.add("columnCell");
+
   parentDiv.appendChild(columnDiv);
 
   return columnDiv;
@@ -31,10 +30,10 @@ function addRowDiv(parentDiv, array) {
   array = JSON.stringify(array);
   const rowDiv = document.createElement("div");
   //   rowDiv.classList.add("rowDiv");
-  rowDiv.style.cssText = "height: 40px; width: 40px; border: 1px solid red;";
   // rowDiv.textContent = array;
   // rowDiv.setAttribute("id", JSON.stringify(array));
-  rowDiv.classList.add(JSON.stringify(array));
+  rowDiv.classList.add("cell");
+  rowDiv.setAttribute("id", JSON.stringify(array));
   parentDiv.appendChild(rowDiv);
 
   return rowDiv;
