@@ -1,4 +1,4 @@
-function uiGameBoard(id) {
+function generateGameBoardUi(id) {
   const gameBoardContainer = document.createElement("div");
   gameBoardContainer.setAttribute("id", id);
 
@@ -14,7 +14,7 @@ function uiGameBoard(id) {
   return gameBoardContainer;
 }
 
-export { uiGameBoard };
+export { generateGameBoardUi };
 
 function addColumnDiv(parentDiv) {
   const columnDiv = document.createElement("div");
