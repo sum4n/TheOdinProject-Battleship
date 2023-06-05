@@ -19,6 +19,17 @@ const dragDiv = document.createElement("div");
 dragDiv.setAttribute("id", "dragDiv");
 dragDiv.setAttribute("draggable", true);
 
+const dragCell1 = document.createElement("div");
+dragCell1.classList.add("dragCell");
+// dragCell1.setAttribute("draggable", true);
+const dragCell2 = document.createElement("div");
+dragCell2.classList.add("dragCell");
+// dragCell2.setAttribute("draggable", true);
+const dragCell3 = document.createElement("div");
+dragCell3.classList.add("dragCell");
+
+dragDiv.append(dragCell1, dragCell2, dragCell3);
+
 body.appendChild(dragDiv);
 
 const cells = document.querySelectorAll(".playerCell");
@@ -27,36 +38,93 @@ const cells = document.querySelectorAll(".playerCell");
 function handleDragStart(e) {
   // console.log(e.target);
   // console.log(this.id);
+  // console.log(e.target.childNodes.length);
   e.dataTransfer.effectAllowed = "move";
-  e.dataTransfer.setData("text", e.target.id);
+  e.dataTransfer.setData("text", e.target.childNodes.length);
 }
 
 function handleDragOver(e) {
-  //   console.log(e);
+  // console.log(e);
   e.preventDefault();
 }
 
 function handleDragEnter(e) {
-  //   console.log(e);
-  this.classList.add("dragEnter");
+  console.log(e.target.classList[0]);
+  e.target.classList.add("dragEnter");
+
+  // console.log(shipLocation);
+
+  let count = parseInt(e.dataTransfer.getData("text"));
+  // console.log(count);
+
+  for (let i = 1; i < count; i++) {
+    let shipLocation = JSON.stringify(
+      JSON.stringify([
+        parseInt(e.target.classList[0][2]),
+        parseInt(e.target.classList[0][4]) + i,
+      ])
+    );
+    // console.log(shipLocation);
+    // console.log(document.getElementsByClassName(shipLocation)[0]);
+    document.getElementsByClassName(shipLocation)[0].classList.add("dragEnter");
+  }
 }
 
 function handleDragLeave(e) {
   //   console.log(e);
-  this.classList.remove("dragEnter");
+  e.target.classList.remove("dragEnter");
+
+  let count = parseInt(e.dataTransfer.getData("text"));
+  // console.log(count);
+
+  for (let i = 1; i < count; i++) {
+    let shipLocation = JSON.stringify(
+      JSON.stringify([
+        parseInt(e.target.classList[0][2]),
+        parseInt(e.target.classList[0][4]) + i,
+      ])
+    );
+    // console.log(shipLocation);
+    // console.log(document.getElementsByClassName(shipLocation)[0]);
+    document
+      .getElementsByClassName(shipLocation)[0]
+      .classList.remove("dragEnter");
+  }
 }
 
 function handleDrop(e) {
   e.preventDefault();
   // e.target.appendChild(document.getElementById("dragDiv"));
-  // console.log(e.target);
+  console.log(e.target);
 
-  this.classList.remove("dragEnter");
+  e.target.classList.remove("dragEnter");
+  let count = parseInt(e.dataTransfer.getData("text"));
+  // console.log(count);
+
+  for (let i = 1; i < count; i++) {
+    let shipLocation = JSON.stringify(
+      JSON.stringify([
+        parseInt(e.target.classList[0][2]),
+        parseInt(e.target.classList[0][4]) + i,
+      ])
+    );
+    // console.log(shipLocation);
+    // console.log(document.getElementsByClassName(shipLocation)[0]);
+    document
+      .getElementsByClassName(shipLocation)[0]
+      .classList.remove("dragEnter");
+  }
 
   let shipLocation = [
     [parseInt(e.target.classList[0][2]), parseInt(e.target.classList[0][4])],
   ];
 
+  for (let i = 1; i < count; i++) {
+    shipLocation.push([
+      parseInt(e.target.classList[0][2]),
+      parseInt(e.target.classList[0][4]) + i,
+    ]);
+  }
   console.log(shipLocation);
 
   player.gameboard.placeShip(shipLocation);
