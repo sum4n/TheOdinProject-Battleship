@@ -1,6 +1,13 @@
+body {
+  background-color: rgb(28, 60, 91);
+}
+
 #gameBoardDiv {
   display: flex;
   justify-content: space-around;
+  height: 500px;
+  border: 1px solid blue;
+  margin: 10px;
 }
 
 /* player and ai board */
@@ -37,4 +44,15 @@
 
 .missCell {
   background-color: rgb(218, 137, 137);
+}
+
+#dragDiv {
+  height: 40px;
+  width: 40px;
+  border: 1px solid green;
+  background-color: rgb(4, 255, 251);
+}
+
+.dragEnter {
+  background-color: green;
 }

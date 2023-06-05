@@ -1,33 +1,43 @@
 import { Player } from "./player";
 
 let player = Player();
-let p_ship1 = player.gameboard.placeShip([
+
+// TODO get ship location through drag and drop
+
+let p_ship1 = [
   [2, 4],
   [2, 5],
-]);
-let p_ship2 = player.gameboard.placeShip([
-  [3, 4],
-  [3, 5],
-  [3, 6],
-]);
-let p_ship3 = player.gameboard.placeShip([
-  [0, 1],
-  [0, 2],
-  [0, 3],
-]);
-let p_ship4 = player.gameboard.placeShip([
-  [7, 5],
-  [7, 6],
-  [7, 7],
-  [7, 8],
-]);
-let p_ship5 = player.gameboard.placeShip([
-  [5, 1],
-  [5, 2],
-  [5, 3],
-  [5, 4],
-  [5, 5],
-]);
+];
+
+// let p_ship2 = [
+//   [3, 4],
+//   [3, 5],
+//   [3, 6],
+// ];
+// let p_ship3 = [
+//   [0, 1],
+//   [0, 2],
+//   [0, 3],
+// ];
+// let p_ship4 = [
+//   [7, 5],
+//   [7, 6],
+//   [7, 7],
+//   [7, 8],
+// ];
+// let p_ship5 = [
+//   [5, 1],
+//   [5, 2],
+//   [5, 3],
+//   [5, 4],
+//   [5, 5],
+// ];
+
+player.gameboard.placeShip(p_ship1);
+// player.gameboard.placeShip(p_ship2);
+// player.gameboard.placeShip(p_ship3);
+// player.gameboard.placeShip(p_ship4);
+// player.gameboard.placeShip(p_ship5);
 
 // player board
 function populatePlayerBoard() {
