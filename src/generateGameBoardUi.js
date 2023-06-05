@@ -7,7 +7,7 @@ function generateGameBoardUi(id) {
   for (let i = 0; i <= 9; i++) {
     let columnDiv = addColumnDiv(gameBoardContainer);
     for (let j = 0; j <= 9; j++) {
-      addRowDiv(columnDiv, [i, j]);
+      addRowDiv(columnDiv, [i, j], id);
     }
   }
 
@@ -25,7 +25,7 @@ function addColumnDiv(parentDiv) {
   return columnDiv;
 }
 
-function addRowDiv(parentDiv, array) {
+function addRowDiv(parentDiv, array, classname) {
   // do not know why JSON.stringfy is needed twice here.
   array = JSON.stringify(array);
   const rowDiv = document.createElement("div");
@@ -34,7 +34,7 @@ function addRowDiv(parentDiv, array) {
   rowDiv.classList.add(JSON.stringify(array));
 
   // 'cell' class for styling
-  rowDiv.classList.add("cell");
+  rowDiv.classList.add(classname + "Cell");
 
   parentDiv.appendChild(rowDiv);
 

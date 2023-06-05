@@ -37,7 +37,7 @@ function gameloop() {
       if (ai.allAIShipLocations.includes(JSON.stringify(playerTarget))) {
         e.target.classList.replace("shipCell", "hitCell");
       } else {
-        e.target.classList.replace("cell", "missCell");
+        e.target.classList.replace("aiCell", "missCell");
       }
       player.attack(playerTarget, ai);
 
@@ -56,7 +56,7 @@ function gameloop() {
       if (aiTarget.classList.contains("shipCell")) {
         aiTarget.classList.replace("shipCell", "hitCell");
       } else {
-        aiTarget.classList.replace("cell", "missCell");
+        aiTarget.classList.replace("playerCell", "missCell");
         // console.log(aiTarget);
       }
     }

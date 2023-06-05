@@ -21,7 +21,7 @@ dragDiv.setAttribute("draggable", true);
 
 body.appendChild(dragDiv);
 
-const cells = document.querySelectorAll(".cell");
+const cells = document.querySelectorAll(".playerCell");
 // console.log(cells);
 
 function handleDragStart(e) {

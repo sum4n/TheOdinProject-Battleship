@@ -22,7 +22,7 @@ function populateAiBoard() {
     // [1] indicates cells from ai board
     let cell = document.getElementsByClassName(x)[1];
     // console.log(cell);
-    cell.classList.replace("cell", "shipCell");
+    cell.classList.replace("aiCell", "shipCell");
   });
 }
 

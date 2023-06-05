@@ -49,7 +49,7 @@ function populatePlayerBoard() {
     // console.log(JSON.stringify(location));
     // [0] indicates cells from player board
     let cell = document.getElementsByClassName(JSON.stringify(location))[0];
-    cell.classList.replace("cell", "shipCell");
+    cell.classList.replace("playerCell", "shipCell");
   });
 }
 // populatePlayerBoard();
