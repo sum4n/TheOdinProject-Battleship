@@ -18,6 +18,7 @@ body.appendChild(gameBoardDiv);
 const dragDiv = document.createElement("div");
 dragDiv.setAttribute("id", "dragDiv");
 dragDiv.setAttribute("draggable", true);
+dragDiv.classList.add("dragHorizontal");
 
 const dragCell1 = document.createElement("div");
 dragCell1.classList.add("dragCell");
@@ -36,11 +37,14 @@ const cells = document.querySelectorAll(".playerCell");
 // console.log(cells);
 
 function handleDragStart(e) {
-  // console.log(e.target);
+  console.log(e.target);
   // console.log(this.id);
-  // console.log(e.target.childNodes.length);
+  console.log(e.target.classList[0]);
   e.dataTransfer.effectAllowed = "move";
-  e.dataTransfer.setData("text", e.target.childNodes.length);
+  e.dataTransfer.setData("text", [
+    e.target.childNodes.length,
+    e.target.classList[0],
+  ]);
 }
 
 function handleDragOver(e) {
@@ -49,21 +53,34 @@ function handleDragOver(e) {
 }
 
 function handleDragEnter(e) {
-  console.log(e.target.classList[0]);
+  // console.log(e.target.classList[0]);
   e.target.classList.add("dragEnter");
 
   // console.log(shipLocation);
 
-  let count = parseInt(e.dataTransfer.getData("text"));
-  // console.log(count);
+  let cellCount = parseInt(e.dataTransfer.getData("text")[0]);
+  // console.log(cellCount);
+  let cellClass = e.dataTransfer.getData("text").slice(2);
+  // console.log(cellClass);
 
-  for (let i = 1; i < count; i++) {
-    let shipLocation = JSON.stringify(
-      JSON.stringify([
-        parseInt(e.target.classList[0][2]),
-        parseInt(e.target.classList[0][4]) + i,
-      ])
-    );
+  for (let i = 1; i < cellCount; i++) {
+    let shipLocation;
+    if (cellClass == "dragHorizontal") {
+      shipLocation = JSON.stringify(
+        JSON.stringify([
+          parseInt(e.target.classList[0][2]),
+          parseInt(e.target.classList[0][4]) + i,
+        ])
+      );
+    } else {
+      shipLocation = JSON.stringify(
+        JSON.stringify([
+          parseInt(e.target.classList[0][2]) + i,
+          parseInt(e.target.classList[0][4]),
+        ])
+      );
+    }
+
     // console.log(shipLocation);
     // console.log(document.getElementsByClassName(shipLocation)[0]);
     document.getElementsByClassName(shipLocation)[0].classList.add("dragEnter");
@@ -74,16 +91,28 @@ function handleDragLeave(e) {
   //   console.log(e);
   e.target.classList.remove("dragEnter");
 
-  let count = parseInt(e.dataTransfer.getData("text"));
-  // console.log(count);
+  let cellCount = parseInt(e.dataTransfer.getData("text"));
+  // console.log(cellCount);
 
-  for (let i = 1; i < count; i++) {
-    let shipLocation = JSON.stringify(
-      JSON.stringify([
-        parseInt(e.target.classList[0][2]),
-        parseInt(e.target.classList[0][4]) + i,
-      ])
-    );
+  let cellClass = e.dataTransfer.getData("text").slice(2);
+
+  for (let i = 1; i < cellCount; i++) {
+    let shipLocation;
+    if (cellClass == "dragHorizontal") {
+      shipLocation = JSON.stringify(
+        JSON.stringify([
+          parseInt(e.target.classList[0][2]),
+          parseInt(e.target.classList[0][4]) + i,
+        ])
+      );
+    } else {
+      shipLocation = JSON.stringify(
+        JSON.stringify([
+          parseInt(e.target.classList[0][2]) + i,
+          parseInt(e.target.classList[0][4]),
+        ])
+      );
+    }
     // console.log(shipLocation);
     // console.log(document.getElementsByClassName(shipLocation)[0]);
     document
@@ -98,16 +127,28 @@ function handleDrop(e) {
   console.log(e.target);
 
   e.target.classList.remove("dragEnter");
-  let count = parseInt(e.dataTransfer.getData("text"));
-  // console.log(count);
 
-  for (let i = 1; i < count; i++) {
-    let shipLocation = JSON.stringify(
-      JSON.stringify([
-        parseInt(e.target.classList[0][2]),
-        parseInt(e.target.classList[0][4]) + i,
-      ])
-    );
+  let cellCount = parseInt(e.dataTransfer.getData("text"));
+  // console.log(cellCount);
+  let cellClass = e.dataTransfer.getData("text").slice(2);
+
+  for (let i = 1; i < cellCount; i++) {
+    let shipLocation;
+    if (cellClass == "dragHorizontal") {
+      shipLocation = JSON.stringify(
+        JSON.stringify([
+          parseInt(e.target.classList[0][2]),
+          parseInt(e.target.classList[0][4]) + i,
+        ])
+      );
+    } else {
+      shipLocation = JSON.stringify(
+        JSON.stringify([
+          parseInt(e.target.classList[0][2]) + i,
+          parseInt(e.target.classList[0][4]),
+        ])
+      );
+    }
     // console.log(shipLocation);
     // console.log(document.getElementsByClassName(shipLocation)[0]);
     document
@@ -119,11 +160,18 @@ function handleDrop(e) {
     [parseInt(e.target.classList[0][2]), parseInt(e.target.classList[0][4])],
   ];
 
-  for (let i = 1; i < count; i++) {
-    shipLocation.push([
-      parseInt(e.target.classList[0][2]),
-      parseInt(e.target.classList[0][4]) + i,
-    ]);
+  for (let i = 1; i < cellCount; i++) {
+    if (cellClass == "dragHorizontal") {
+      shipLocation.push([
+        parseInt(e.target.classList[0][2]),
+        parseInt(e.target.classList[0][4]) + i,
+      ]);
+    } else {
+      shipLocation.push([
+        parseInt(e.target.classList[0][2]) + i,
+        parseInt(e.target.classList[0][4]),
+      ]);
+    }
   }
   console.log(shipLocation);
 
