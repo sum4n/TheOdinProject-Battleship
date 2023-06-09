@@ -14,8 +14,6 @@ function generateGameBoardUi(id) {
   return gameBoardContainer;
 }
 
-export { generateGameBoardUi };
-
 function addColumnDiv(parentDiv) {
   const columnDiv = document.createElement("div");
   columnDiv.classList.add("columnCell");
@@ -40,3 +38,36 @@ function addRowDiv(parentDiv, array, classname) {
 
   return rowDiv;
 }
+
+function generateDraggablePlayerShips() {
+  const dragShipContainer = document.createElement("div");
+  dragShipContainer.setAttribute("id", "dragShipContainer");
+
+  let ship1 = generateShipCells(2, "ship1");
+  let ship2 = generateShipCells(3, "ship2");
+  let ship3 = generateShipCells(3, "ship3");
+  let ship4 = generateShipCells(4, "ship4");
+  let ship5 = generateShipCells(5, "ship5");
+
+  dragShipContainer.append(ship1, ship2, ship3, ship4, ship5);
+
+  return dragShipContainer;
+}
+
+function generateShipCells(quantity, shipName) {
+  const dragShip = document.createElement("div");
+  dragShip.setAttribute("draggable", true);
+  dragShip.setAttribute("id", shipName);
+  dragShip.classList.add("dragHorizontal", "dragDiv");
+
+  for (let i = 1; i <= quantity; i++) {
+    let dragCell = document.createElement("div");
+    dragCell.classList.add("dragCell");
+
+    dragShip.append(dragCell);
+  }
+
+  return dragShip;
+}
+
+export { generateGameBoardUi, generateDraggablePlayerShips };

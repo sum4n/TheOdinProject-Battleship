@@ -1,4 +1,7 @@
-import { generateGameBoardUi } from "./generateGameBoardUi";
+import {
+  generateGameBoardUi,
+  generateDraggablePlayerShips,
+} from "./generateGameBoardUi";
 import { populateAiBoard, gameloop } from "./gameLoop";
 import { player, populatePlayerBoard } from "./populatePlayer";
 
@@ -15,23 +18,7 @@ gameBoardDiv.appendChild(generateGameBoardUi("ai"));
 body.appendChild(gameBoardDiv);
 
 // DRAG & DROP
-const dragDiv = document.createElement("div");
-dragDiv.setAttribute("id", "dragDiv");
-dragDiv.setAttribute("draggable", true);
-dragDiv.classList.add("dragHorizontal");
-
-const dragCell1 = document.createElement("div");
-dragCell1.classList.add("dragCell");
-// dragCell1.setAttribute("draggable", true);
-const dragCell2 = document.createElement("div");
-dragCell2.classList.add("dragCell");
-// dragCell2.setAttribute("draggable", true);
-const dragCell3 = document.createElement("div");
-dragCell3.classList.add("dragCell");
-
-dragDiv.append(dragCell1, dragCell2, dragCell3);
-
-body.appendChild(dragDiv);
+body.append(generateDraggablePlayerShips());
 
 const cells = document.querySelectorAll(".playerCell");
 // console.log(cells);
@@ -44,6 +31,7 @@ function handleDragStart(e) {
   e.dataTransfer.setData("text", [
     e.target.childNodes.length,
     e.target.classList[0],
+    e.target.id,
   ]);
 }
 
@@ -78,7 +66,7 @@ function handleDrop(e) {
   ];
 
   let cellCount = parseInt(e.dataTransfer.getData("text")[0]);
-  let cellClass = e.dataTransfer.getData("text").slice(2);
+  let cellClass = e.dataTransfer.getData("text").slice(2, 16);
 
   for (let i = 1; i < cellCount; i++) {
     if (cellClass == "dragHorizontal") {
@@ -98,10 +86,16 @@ function handleDrop(e) {
   player.gameboard.placeShip(shipLocation);
   populatePlayerBoard();
 
-  body.removeChild(dragDiv);
+  // console.log(e.dataTransfer.getData("text").slice(-5));
+  let shipName = e.dataTransfer.getData("text").slice(-5);
+  let dragShipContainerDiv = document.getElementById("dragShipContainer");
+  dragShipContainerDiv.removeChild(document.getElementById(shipName));
 }
 
-dragDiv.addEventListener("dragstart", handleDragStart);
+let dragDiv = document.querySelectorAll(".dragDiv");
+dragDiv.forEach((div) => {
+  div.addEventListener("dragstart", handleDragStart);
+});
 
 cells.forEach((cell) => {
   cell.addEventListener("dragover", handleDragOver);
@@ -119,7 +113,7 @@ function markBoardWithDragNDrop(e) {
   // console.log(e.type);
   let cellCount = parseInt(e.dataTransfer.getData("text")[0]);
   // console.log(cellCount);
-  let cellClass = e.dataTransfer.getData("text").slice(2);
+  let cellClass = e.dataTransfer.getData("text").slice(2, 16);
   // console.log(cellClass);
 
   for (let i = 1; i < cellCount; i++) {
