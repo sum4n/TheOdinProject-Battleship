@@ -87,11 +87,11 @@ function handleDrop(e) {
 
   // console.log(e.dataTransfer.getData("text").slice(-5));
   let shipName = e.dataTransfer.getData("text").slice(-5);
-  let dragShipContainerDiv = document.getElementById("dragShipContainer");
-  dragShipContainerDiv.removeChild(document.getElementById(shipName));
+  let dropShipDiv = document.getElementById("dropShipDiv");
+  dropShipDiv.removeChild(document.getElementById(shipName));
 
   // Add ai board and run game after all player ships have been placed.
-  if (dragShipContainerDiv.childElementCount == 0) {
+  if (dropShipDiv.childElementCount == 0) {
     gameBoardDiv.removeChild(document.getElementById("dragShipContainer"));
     gameBoardDiv.appendChild(generateGameBoardUi("ai"));
     populateAiBoard();

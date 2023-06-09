@@ -43,13 +43,20 @@ function generateDraggablePlayerShips() {
   const dragShipContainer = document.createElement("div");
   dragShipContainer.setAttribute("id", "dragShipContainer");
 
+  dragShipContainer.textContent = "Drop ships on your board.";
+
+  const dropShipDiv = document.createElement("div");
+  dropShipDiv.setAttribute("id", "dropShipDiv");
+
   let ship1 = generateShipCells(2, "ship1");
   let ship2 = generateShipCells(3, "ship2");
   let ship3 = generateShipCells(3, "ship3");
   let ship4 = generateShipCells(4, "ship4");
   let ship5 = generateShipCells(5, "ship5");
 
-  dragShipContainer.append(ship1, ship2, ship3, ship4, ship5);
+  dropShipDiv.append(ship1, ship2, ship3, ship4, ship5);
+
+  dragShipContainer.appendChild(dropShipDiv);
 
   return dragShipContainer;
 }

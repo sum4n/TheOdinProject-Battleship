@@ -12,10 +12,18 @@ body {
 
 /* player and ai board */
 #player,
-#ai {
+#ai,
+#dragShipContainer {
   height: 420px;
   width: 400px;
   text-align: center;
+  color: white;
+}
+
+#dropShipDiv {
+  border: 2px solid red;
+  height: 415px;
+  width: 410px;
 }
 
 .columnCell {
@@ -47,12 +55,8 @@ body {
   background-color: rgb(218, 137, 137);
 }
 
-#dragDiv {
-  /* display: flex; */
-  /* height: 40px; */
-  /* width: 120px; */
-  /* border: 1px solid green; */
-  /* background-color: rgb(4, 255, 251); */
+.dragDiv {
+  margin-bottom: 10px;
 }
 
 .dragHorizontal {
