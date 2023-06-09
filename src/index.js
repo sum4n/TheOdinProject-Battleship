@@ -23,9 +23,9 @@ const cells = document.querySelectorAll(".playerCell");
 // console.log(cells);
 
 function handleDragStart(e) {
-  console.log(e.target);
+  // console.log(e.target);
   // console.log(this.id);
-  console.log(e.target.classList[0]);
+  // console.log(e.target.classList[0]);
   e.dataTransfer.effectAllowed = "move";
   e.dataTransfer.setData("text", [
     e.target.childNodes.length,
@@ -54,7 +54,7 @@ function handleDragLeave(e) {
 function handleDrop(e) {
   e.preventDefault();
   // e.target.appendChild(document.getElementById("dragDiv"));
-  console.log(e.target);
+  // console.log(e.target);
 
   e.target.classList.remove("dragEnter");
 
@@ -80,15 +80,22 @@ function handleDrop(e) {
       ]);
     }
   }
-  console.log(shipLocation);
 
-  player.gameboard.placeShip(shipLocation);
-  populatePlayerBoard();
+  let checkShipAlreadyThere = shipLocation.some((location) => {
+    return player.gameboard.shipLocationLists.includes(
+      JSON.stringify(location)
+    );
+  });
 
-  // console.log(e.dataTransfer.getData("text").slice(-5));
-  let shipName = e.dataTransfer.getData("text").slice(-5);
-  let dropShipDiv = document.getElementById("dropShipDiv");
-  dropShipDiv.removeChild(document.getElementById(shipName));
+  if (!checkShipAlreadyThere) {
+    player.gameboard.placeShip(shipLocation);
+    populatePlayerBoard();
+
+    // console.log(e.dataTransfer.getData("text").slice(-5));
+    let shipName = e.dataTransfer.getData("text").slice(-5);
+    let dropShipDiv = document.getElementById("dropShipDiv");
+    dropShipDiv.removeChild(document.getElementById(shipName));
+  }
 
   // Add ai board and run game after all player ships have been placed.
   if (dropShipDiv.childElementCount == 0) {
