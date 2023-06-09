@@ -43,7 +43,7 @@ function generateDraggablePlayerShips() {
   const dragShipContainer = document.createElement("div");
   dragShipContainer.setAttribute("id", "dragShipContainer");
 
-  dragShipContainer.textContent = "Drop ships on your board.";
+  dragShipContainer.textContent = "Drag ships. Click to ROTATE.";
 
   const dropShipDiv = document.createElement("div");
   dropShipDiv.setAttribute("id", "dropShipDiv");

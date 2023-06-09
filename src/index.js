@@ -16,9 +16,15 @@ gameBoardDiv.appendChild(generateGameBoardUi("player"));
 
 body.appendChild(gameBoardDiv);
 
-// DRAG & DROP
 gameBoardDiv.appendChild(generateDraggablePlayerShips());
 
+document.querySelectorAll(".dragDiv").forEach((div) => {
+  div.addEventListener("click", () => {
+    div.classList.toggle("dragHorizontal");
+  });
+});
+
+// DRAG & DROP
 const cells = document.querySelectorAll(".playerCell");
 // console.log(cells);
 
