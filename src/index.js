@@ -13,12 +13,11 @@ const gameBoardDiv = document.createElement("div");
 gameBoardDiv.setAttribute("id", "gameBoardDiv");
 
 gameBoardDiv.appendChild(generateGameBoardUi("player"));
-gameBoardDiv.appendChild(generateGameBoardUi("ai"));
 
 body.appendChild(gameBoardDiv);
 
 // DRAG & DROP
-body.append(generateDraggablePlayerShips());
+gameBoardDiv.appendChild(generateDraggablePlayerShips());
 
 const cells = document.querySelectorAll(".playerCell");
 // console.log(cells);
@@ -90,6 +89,14 @@ function handleDrop(e) {
   let shipName = e.dataTransfer.getData("text").slice(-5);
   let dragShipContainerDiv = document.getElementById("dragShipContainer");
   dragShipContainerDiv.removeChild(document.getElementById(shipName));
+
+  // Add ai board and run game after all player ships have been placed.
+  if (dragShipContainerDiv.childElementCount == 0) {
+    gameBoardDiv.removeChild(document.getElementById("dragShipContainer"));
+    gameBoardDiv.appendChild(generateGameBoardUi("ai"));
+    populateAiBoard();
+    gameloop();
+  }
 }
 
 let dragDiv = document.querySelectorAll(".dragDiv");
@@ -106,8 +113,8 @@ cells.forEach((cell) => {
 
 ////////////////////////
 populatePlayerBoard();
-populateAiBoard();
-gameloop();
+// populateAiBoard();
+// gameloop();
 
 function markBoardWithDragNDrop(e) {
   // console.log(e.type);
