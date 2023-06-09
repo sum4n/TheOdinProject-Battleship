@@ -35,7 +35,7 @@ function gameloop() {
 
       // Hits paints target red, misses paints target red.
       if (ai.allAIShipLocations.includes(JSON.stringify(playerTarget))) {
-        e.target.classList.replace("shipCell", "hitCell");
+        e.target.classList.replace("aiCell", "hitCell");
       } else {
         e.target.classList.replace("aiCell", "missCell");
       }
@@ -65,13 +65,6 @@ function gameloop() {
     // If the game is won, alert winners name.
     if (player.gameboard.allShipsSunk()) {
       alert("Ai wins");
-      // document.getElementById("player").remove();
-      // document.getElementById("ai").remove();
-      // body.appendChild(uiGameBoard("player"));
-      // body.appendChild(uiGameBoard("ai"));
-      // // ai.aiAttackList = [];
-      // populatePlayerBoard();
-      // populateAiBoard();
     }
 
     if (ai.gameboard.allShipsSunk()) {

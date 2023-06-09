@@ -107,7 +107,7 @@ function handleDrop(e) {
   if (dropShipDiv.childElementCount == 0) {
     gameBoardDiv.removeChild(document.getElementById("dragShipContainer"));
     gameBoardDiv.appendChild(generateGameBoardUi("ai"));
-    populateAiBoard();
+    // populateAiBoard();
     gameloop();
   }
 }
