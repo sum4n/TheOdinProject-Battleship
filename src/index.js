@@ -35,7 +35,7 @@ function handleDragStart(e) {
   e.dataTransfer.effectAllowed = "move";
   e.dataTransfer.setData("text", [
     e.target.childNodes.length,
-    e.target.classList[0],
+    e.target.classList[1],
     e.target.id,
   ]);
 }

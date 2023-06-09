@@ -65,7 +65,7 @@ function generateShipCells(quantity, shipName) {
   const dragShip = document.createElement("div");
   dragShip.setAttribute("draggable", true);
   dragShip.setAttribute("id", shipName);
-  dragShip.classList.add("dragHorizontal", "dragDiv");
+  dragShip.classList.add("dragDiv", "dragHorizontal");
 
   for (let i = 1; i <= quantity; i++) {
     let dragCell = document.createElement("div");
