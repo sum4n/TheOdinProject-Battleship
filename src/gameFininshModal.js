@@ -14,7 +14,8 @@ function gameFinishModal(msg) {
   playAgainBtn.textContent = "Play Again";
 
   playAgainBtn.addEventListener("click", () => {
-    console.log("Clicked");
+    location.reload();
+    return false;
   });
 
   modalContent.append(winnerMsg, playAgainBtn);
