@@ -73,3 +73,50 @@ body {
   border: 1px solid green;
   background-color: rgb(4, 255, 251);
 }
+
+#modalDiv {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(128, 126, 121); /* Fallback color */
+  background-color: rgba(106, 109, 107, 0.4); /* Black w/ opacity */
+}
+
+.modalContent {
+  background-color: rgb(28, 60, 91);
+  margin: auto;
+  padding: 20px;
+  border: 1px solid antiquewhite;
+  width: 80%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
+#winnerMsg {
+  font-size: 2rem;
+  color: antiquewhite;
+  font-weight: bold;
+}
+
+#playAgainBtn {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  background-color: antiquewhite;
+  border: none;
+  border-radius: 5px;
+}
+
+#playAgainBtn:hover {
+  background-color: aliceblue;
+}

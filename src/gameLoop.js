@@ -1,5 +1,6 @@
 import { player, populatePlayerBoard } from "./populatePlayer";
 import { ai, populateAiBoard } from "./populateAi";
+import { gameFinishModal } from "./gameFininshModal";
 
 // game loop
 function gameloop() {
@@ -64,11 +65,11 @@ function gameloop() {
 
     // If the game is won, alert winners name.
     if (player.gameboard.allShipsSunk()) {
-      alert("Ai wins");
+      document.querySelector("body").append(gameFinishModal("You Lose!!"));
     }
 
     if (ai.gameboard.allShipsSunk()) {
-      alert("Player wins");
+      document.querySelector("body").append(gameFinishModal("You Win!!"));
     }
   });
 }
