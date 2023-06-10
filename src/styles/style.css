@@ -57,6 +57,7 @@ body {
 
 .dragDiv {
   margin-bottom: 10px;
+  width: fit-content;
 }
 
 .dragHorizontal {
