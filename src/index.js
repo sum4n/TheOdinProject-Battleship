@@ -47,14 +47,10 @@ function handleDragOver(e) {
 function handleDragEnter(e) {
   // console.log(e.target.classList[0]);
   e.target.classList.add("dragEnter");
-
-  markBoardWithDragNDrop(e);
 }
 
 function handleDragLeave(e) {
   e.target.classList.remove("dragEnter");
-
-  markBoardWithDragNDrop(e);
 }
 
 function handleDrop(e) {
@@ -63,8 +59,6 @@ function handleDrop(e) {
   // console.log(e.target);
 
   e.target.classList.remove("dragEnter");
-
-  markBoardWithDragNDrop(e);
 
   let shipLocation = [
     [parseInt(e.target.classList[0][2]), parseInt(e.target.classList[0][4])],
@@ -128,42 +122,3 @@ cells.forEach((cell) => {
 populatePlayerBoard();
 // populateAiBoard();
 // gameloop();
-
-function markBoardWithDragNDrop(e) {
-  // console.log(e.type);
-  let cellCount = parseInt(e.dataTransfer.getData("text")[0]);
-  // console.log(cellCount);
-  let cellClass = e.dataTransfer.getData("text").slice(2, 16);
-  // console.log(cellClass);
-
-  for (let i = 1; i < cellCount; i++) {
-    let shipLocation;
-    if (cellClass == "dragHorizontal") {
-      shipLocation = JSON.stringify(
-        JSON.stringify([
-          parseInt(e.target.classList[0][2]),
-          parseInt(e.target.classList[0][4]) + i,
-        ])
-      );
-    } else {
-      shipLocation = JSON.stringify(
-        JSON.stringify([
-          parseInt(e.target.classList[0][2]) + i,
-          parseInt(e.target.classList[0][4]),
-        ])
-      );
-    }
-
-    // console.log(shipLocation);
-    // console.log(document.getElementsByClassName(shipLocation)[0]);
-    if (e.type == "dragenter") {
-      document
-        .getElementsByClassName(shipLocation)[0]
-        .classList.add("dragEnter");
-    } else {
-      document
-        .getElementsByClassName(shipLocation)[0]
-        .classList.remove("dragEnter");
-    }
-  }
-}
