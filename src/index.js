@@ -67,6 +67,21 @@ function handleDrop(e) {
   let cellCount = parseInt(e.dataTransfer.getData("text")[0]);
   let cellClass = e.dataTransfer.getData("text").slice(2, 16);
 
+  // Can not place ship out of bound
+  if (
+    cellClass == "dragHorizontal" &&
+    parseInt(e.target.classList[0][4]) + (cellCount - 1) > 9
+  ) {
+    return;
+  }
+
+  if (
+    cellClass != "dragHorizontal" &&
+    parseInt(e.target.classList[0][2]) + (cellCount - 1) > 9
+  ) {
+    return;
+  }
+
   for (let i = 1; i < cellCount; i++) {
     if (cellClass == "dragHorizontal") {
       shipLocation.push([
