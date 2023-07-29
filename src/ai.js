@@ -7,7 +7,7 @@ const AI = () => {
 
   let lastSuccesfulAttackLocation = "[]";
 
-  const attack = (targetPlayer, attackLocation = getRandomCoordinate()) => {
+  const attack = (targetPlayer, attackLocation) => {
     // console.log(attackLocation);
     // console.log(aiAttackList);
 
@@ -33,22 +33,48 @@ const AI = () => {
           attackLocation = getRandomCoordinate();
         }
       }
-
       // console.log(attackLocation);
     }
 
-    // if (
-    //   lastSuccesfulAttackLocation.length == 5 &&
-    //   !ajdacentLocationsAttacked(lastSuccesfulAttackLocation)
-    // ) {
-    //   attackLocation = getAdjacentCoordinate(
-    //     JSON.parse(aiAttackList[aiAttackList.length - 1])
-    //   );
-    //   console.log(attackLocation);
-    // }
+    // console.log(!ajdacentLocationsAttacked(lastSuccesfulAttackLocation));
+    // console.log(lastSuccesfulAttackLocation);
+
+    // If there is succesful hit location previously and its adjacent cells are not hit,
+    // keep hitting it. If all the adjacent cells are hit, hit random.
+    // This is not perfect yet, as it will take latest successful hit and get its
+    // adjacent cells, discarding previous sucessful hit cells which has adjacent cells unhit.
+    if (
+      lastSuccesfulAttackLocation.length == 5 &&
+      !ajdacentLocationsAttacked(lastSuccesfulAttackLocation)
+    ) {
+      attackLocation = getAdjacentCoordinate(
+        JSON.parse(lastSuccesfulAttackLocation)
+      );
+
+      while (aiAttackList.includes(JSON.stringify(attackLocation))) {
+        attackLocation = getAdjacentCoordinate(
+          JSON.parse(lastSuccesfulAttackLocation)
+        );
+        // If all adjacent slots have been attacked, get random attack
+        // and break the while loop
+        if (ajdacentLocationsAttacked(JSON.stringify(attackLocation))) {
+          attackLocation = getRandomCoordinate();
+        }
+      }
+      // console.log(attackLocation);
+    }
 
     // console.log(lastSuccesfulAttackLocation);
     // console.log(ajdacentLocationsAttacked(lastSuccesfulAttackLocation));
+
+    // This is basically else for previous ifs.
+    // This is executes first time.
+    if (
+      ajdacentLocationsAttacked(lastSuccesfulAttackLocation) ||
+      lastSuccesfulAttackLocation.length < 5
+    ) {
+      attackLocation = getRandomCoordinate();
+    }
 
     // if the attackLocation is in the aiAttackList, chose another attackLocation.
     while (aiAttackList.includes(JSON.stringify(attackLocation))) {
