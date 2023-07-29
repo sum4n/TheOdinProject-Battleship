@@ -7,14 +7,14 @@ import { player, populatePlayerBoard } from "./populatePlayer";
 
 import "./styles/style.css";
 
-const body = document.querySelector("body");
+const gameArea = document.querySelector(".gameArea");
 
 const gameBoardDiv = document.createElement("div");
 gameBoardDiv.setAttribute("id", "gameBoardDiv");
 
 gameBoardDiv.appendChild(generateGameBoardUi("player"));
 
-body.appendChild(gameBoardDiv);
+gameArea.appendChild(gameBoardDiv);
 
 gameBoardDiv.appendChild(generateDraggablePlayerShips());
 
