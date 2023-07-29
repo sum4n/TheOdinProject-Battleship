@@ -2,6 +2,7 @@ import { player, populatePlayerBoard } from "./populatePlayer";
 import { ai, populateAiBoard } from "./populateAi";
 import { gameFinishModal } from "./gameFininshModal";
 
+let lastAiAttackSuccesful;
 // game loop
 function gameloop() {
   const aiGameBoard = document.querySelector("#ai");
@@ -45,8 +46,18 @@ function gameloop() {
       // console.log(player.gameboard.missedShots);
 
       // Ai attacks Player (after player attacks) and print attacks on gameboard.
-      ai.attack(player);
+      // If previous ai attack has a successful hit, it sends lastAiAttackSuccesful
 
+      // console.log(lastAiAttackSuccesful);
+      if (lastAiAttackSuccesful) {
+        ai.attack(player, lastAiAttackSuccesful);
+      } else {
+        ai.attack(player);
+      }
+
+      // ai.attack(player);
+
+      // console.log(ai.aiAttackList);
       // find the latest attack (which is last item on the list)
       let target = ai.aiAttackList[ai.aiAttackList.length - 1];
       target = JSON.stringify(target);
@@ -56,8 +67,10 @@ function gameloop() {
       // print successful attack yellow and unsuccessful red
       if (aiTarget.classList.contains("shipCell")) {
         aiTarget.classList.replace("shipCell", "hitCell");
+        lastAiAttackSuccesful = true;
       } else {
         aiTarget.classList.replace("playerCell", "missCell");
+        lastAiAttackSuccesful = false;
         // console.log(aiTarget);
       }
     }

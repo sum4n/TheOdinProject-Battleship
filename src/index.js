@@ -116,6 +116,8 @@ function handleDrop(e) {
   if (dropShipDiv.childElementCount == 0) {
     gameBoardDiv.removeChild(document.getElementById("dragShipContainer"));
     gameBoardDiv.appendChild(generateGameBoardUi("ai"));
+
+    // uncomment line below to check ai ship's location
     // populateAiBoard();
     gameloop();
   }
@@ -135,5 +137,3 @@ cells.forEach((cell) => {
 
 ////////////////////////
 populatePlayerBoard();
-// populateAiBoard();
-// gameloop();
